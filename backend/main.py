@@ -4,8 +4,11 @@ from dal.swapi_client import SwapiClient as swapi_client
 from models.people import Person
 from models.films import Film
 
+PORT = 8111
+
 app = FastAPI()
 
+# Get all films
 @app.get("/api/films", response_model=List[Film])
 async def get_films():
     try:
@@ -14,6 +17,7 @@ async def get_films():
     except requests.exceptions.HTTPError as e:
         raise HTTPException(status_code=404, detail="Films not found") from e
 
+# Get a person by id
 @app.get("/people/{person_id}", response_model=Person)
 async def get_person(person_id: int):
     try:
@@ -24,4 +28,4 @@ async def get_person(person_id: int):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8111)
+    uvicorn.run(app, host="127.0.0.1", port=PORT)
