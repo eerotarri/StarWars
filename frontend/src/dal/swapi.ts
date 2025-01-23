@@ -1,14 +1,15 @@
 const BASE_URL = "http://localhost:8111/api/";
 
-export async function getFilms() {
+async function fetchData(endpoint: string) {
+  const url = BASE_URL + endpoint;
   try {
-    const response = await fetch(BASE_URL + "films/");
+    const response = await fetch(url);
 
     // Handle possible error cases
     if (response.status == 404)
       throw new Error("This resource no longer exists");
     if (response.status == 500 || response.status == 503)
-      throw new Error("This sercive is currently unavailable");
+      throw new Error("This service is currently unavailable");
     if (response.status !== 200) throw new Error(response.statusText);
 
     return await response.json();
@@ -24,6 +25,14 @@ export async function getFilms() {
     if (e instanceof Error) throw e;
 
     // Catch all other errors and throw a general new Error.
-    throw new Error("Failed to fetch films. Contact the administrator.");
+    throw new Error("Failed to fetch data. Contact the administrator.");
   }
+}
+
+export async function getFilms() {
+  return fetchData("films/");
+}
+
+export async function getById(item: String, id: String) {
+  return fetchData(`${item}/${id}`);
 }

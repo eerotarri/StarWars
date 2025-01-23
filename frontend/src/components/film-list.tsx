@@ -5,6 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Film } from "@/lib/models/film";
+import NestedList from "./nested-list";
 
 /**
  * A component that renders a list of Star Wars films using an accordion UI.
@@ -28,7 +29,7 @@ function FilmList({ films }: { films: Film[] | undefined }): JSX.Element {
             {film.title} - Episode {film.episode_id}
           </AccordionTrigger>
           <AccordionContent className="bg-secondary rounded-xl">
-            <div className="flex flex-col gap-4 items-start p-4">
+            <div className="flex flex-col gap-4 items-start pl-4 pt-4">
               <p>
                 <strong>Episode:</strong> {film.episode_id}
               </p>
@@ -45,6 +46,10 @@ function FilmList({ films }: { films: Film[] | undefined }): JSX.Element {
               <p className="text-left">
                 <strong>Opening Crawl:</strong> {film.opening_crawl}
               </p>
+
+              {film.characters && (
+                <NestedList type="Characters" urls={film.characters} />
+              )}
             </div>
           </AccordionContent>
         </AccordionItem>
