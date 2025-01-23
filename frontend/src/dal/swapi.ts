@@ -11,11 +11,7 @@ export async function getFilms() {
       throw new Error("This sercive is currently unavailable");
     if (response.status !== 200) throw new Error(response.statusText);
 
-    const data = await response.json();
-
-    console.log(data);
-
-    return data;
+    return await response.json();
   } catch (e) {
     // If the error is a TypeError, it usually means the backend service is down.
     if (e instanceof TypeError)
