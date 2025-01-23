@@ -1,23 +1,20 @@
 import "./App.css";
 import { useQuery } from "@tanstack/react-query";
 import FilmList from "./components/film-list";
+import ErrorAlert from "./components/error-alert";
 import { Film } from "./lib/models/film";
+import { getFilms } from "./dal/swapi";
 
 function App() {
-  const { data } = useQuery<{ results: Film[] }>({
+  const result = useQuery<{ results: Film[] }>({
     queryKey: ["films"],
-    queryFn: async () => {
-      const response = await fetch("https://swapi.dev/api/films");
-      if (!response.ok) {
-        return;
-      }
-      return response.json();
-    },
+    queryFn: getFilms,
   });
 
   return (
     <main className="flex flex-col bg-background p-4 h-screen">
-      <FilmList films={data?.results} />
+      {result.isSuccess && <FilmList films={result.data?.results} />}
+      {result.isError && <ErrorAlert message={result.error.message} />}
     </main>
   );
 }
