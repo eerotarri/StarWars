@@ -1,12 +1,27 @@
 from typing import List
 from fastapi import FastAPI, HTTPException, requests
-from dal.swapi_client import SwapiClient as swapi_client
+from fastapi.middleware.cors import CORSMiddleware
+from dal.swapi_client import SwapiClient
 from models.people import Person
 from models.films import Film
 
 PORT = 8111
 
 app = FastAPI()
+swapi_client = SwapiClient()
+
+origins = [
+    "http://localhost:4173",
+    "http://localhost:5173",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Get all films
 @app.get("/api/films", response_model=List[Film])

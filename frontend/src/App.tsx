@@ -6,15 +6,15 @@ import { Film } from "./lib/models/film";
 import { getFilms } from "./dal/swapi";
 
 function App() {
-  const result = useQuery<{ results: Film[] }>({
+  const { data, isSuccess, error, isError } = useQuery<Film[]>({
     queryKey: ["films"],
     queryFn: getFilms,
   });
 
   return (
     <main className="flex flex-col bg-background p-4 h-screen">
-      {result.isSuccess && <FilmList films={result.data?.results} />}
-      {result.isError && <ErrorAlert message={result.error.message} />}
+      {isSuccess && <FilmList films={data} />}
+      {isError && <ErrorAlert message={error.message} />}
     </main>
   );
 }

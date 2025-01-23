@@ -6,7 +6,7 @@ function ErrorAlert({ message }: { message: string }): JSX.Element {
     <Alert className="bg-destructive text-foreground rounded-xl">
       <Terminal className="h-4 w-4" />
       <AlertTitle>Heads up!</AlertTitle>
-      <AlertDescription>{message}. Refresh page manually.</AlertDescription>
+      <AlertDescription>{message}</AlertDescription>
     </Alert>
   );
 }
