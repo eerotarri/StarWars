@@ -1,0 +1,43 @@
+# Python bytecode files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+env/
+venv/
+ENV/
+
+# Distribution/Packaging
+*.egg-info/
+dist/
+build/
+eggs/
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# PyCharm
+*.iml
+
+# Logs
+*.log
+
+# Test coverage
+.coverage
+coverage.xml
+nosetests.xml
+test_*.xml
+
+# Environment variables (if you have a .env file)
+.env
