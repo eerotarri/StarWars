@@ -138,14 +138,18 @@ Note:
 - The resource type must be a valid resource type from the Star Wars API.
 - The resource type is case-sensitive.
 """
-@app.get("/api/count/{resource_type}")
-async def get_resource_count(resource_type: str):
+@app.get("/api/count/{resource_type}/{target_type}")
+async def get_resource_count(resource_type: str, target_type: str):
     try:
         data = getattr(swapi_client, f"get_all_{resource_type}")()
-        return { "count": len(data["results"]) }
+        characters_per_film = []
+        for item in data["results"]:
+            characters_count = len(item.get(target_type, []))
+            characters_per_film.append({"name": item.get("title", item.get("name")), "count": characters_count})
+        return characters_per_film
     except requests.exceptions.HTTPError as e:
         raise HTTPException(status_code=404, detail=f"{resource_type} not found") from e
-
+    
 # Run the FastAPI app
 if __name__ == "__main__":
     import uvicorn

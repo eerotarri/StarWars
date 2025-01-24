@@ -4,6 +4,7 @@ import ErrorAlert from "./components/error-alert";
 import { Film } from "./lib/models/film";
 import { getFilms } from "./dal/swapi";
 import NestedList from "./components/nested-list";
+import { CustomPieChart } from "./components/pie-chart";
 
 function App() {
   // Fetch the complete data for all films
@@ -20,10 +21,11 @@ function App() {
   const data_type = data_urls[0].split("/").at(-3) || "undefined type";
 
   return (
-    <main className="flex flex-col bg-background p-4 h-full">
+    <main className="w-screen bg-background p-4 h-full">
       {isSuccess && (
         <NestedList open name={data_type} type={data_type} urls={data_urls} />
       )}
+      <CustomPieChart />
       {isError && <ErrorAlert message={error.message} />}
     </main>
   );

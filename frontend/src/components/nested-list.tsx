@@ -30,7 +30,7 @@ function NestedList({ name, type, urls, open }: NestedListProps): JSX.Element {
 
   return (
     <Accordion
-      className="w-full max-w-7xl self-center text-foreground mb-1"
+      className="w-full self-center text-foreground mb-1"
       type="single"
       collapsible
     >
