@@ -1,36 +1,47 @@
-import { getById } from "@/dal/swapi";
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@radix-ui/react-accordion";
-import { useQuery } from "@tanstack/react-query";
 import NestedList from "./nested-list";
+import { capitalize } from "@/lib/utils";
+import { ChevronDownIcon } from "lucide-react";
 
-function NestedItem({ url }: { url: String }): JSX.Element {
-  const [type, id, _] = url.split("/").slice(-3);
-
-  const { data } = useQuery({
-    queryKey: [type, id],
-    queryFn: () => getById(type, id),
-  });
-
+/**
+ * A component that renders an item for Accordion.
+ * This component can recursively call for another Accordion.
+ * @param {any} data - The data to be displayed in the nested item.
+ * @returns {JSX.Element} The rendered component.
+ */
+function NestedItem({ data }: { data: any }): JSX.Element {
   return (
-    <AccordionItem key={`${type}-${id}`} value={`item-${type}-${id}`}>
-      <AccordionTrigger className="w-full bg-primary pl-4 rounded-xl mt-1">
+    <AccordionItem key={data.url} value={`item-data-${data.url}`}>
+      <AccordionTrigger className="w-full bg-secondary rounded-xl mt-1 AccordionTrigger">
         {data?.name || data?.title || "Loading..."}
+        <ChevronDownIcon
+          className="AccordionChevron float-right"
+          aria-hidden
+          size={24}
+        />
       </AccordionTrigger>
-      <AccordionContent className="bg-secondary rounded-xl mb-4">
+      <AccordionContent className="flex flex-col bg-slate-700 text-left pl-4">
         {data &&
           Object.entries(data).map(([key, value]) => {
             // Skip these keys
-            if (["url", "created", "edited"].includes(key)) {
+            if (["name", "title", "url", "created", "edited"].includes(key)) {
               return null;
             }
 
             // If the value is a URL, fetch the data and render a nested list
             if (typeof value === "string" && value.startsWith("http")) {
-              return <NestedList type={key} key={key} urls={[value]} />;
+              return (
+                <NestedList
+                  name={key}
+                  type={"planets"}
+                  key={value}
+                  urls={[value]}
+                />
+              );
             }
 
             // If the value is an array of URLs, fetch the data and render a nested list
@@ -40,13 +51,20 @@ function NestedItem({ url }: { url: String }): JSX.Element {
             ) {
               // Skip empty arrays
               if (value.length === 0) return null;
-              return <NestedList type={key} key={key} urls={value} />;
+              return (
+                <NestedList
+                  name={key}
+                  type={value[0].split("/").at(-3)}
+                  key={key}
+                  urls={value}
+                />
+              );
             }
 
             // Render the key-value pair
             return (
-              <p key={key}>
-                {key}: {String(value)}
+              <p className="mb-3" key={key}>
+                <strong>{capitalize(key)}</strong>: {String(value)}
               </p>
             );
           })}
