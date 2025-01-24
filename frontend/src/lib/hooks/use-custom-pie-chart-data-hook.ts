@@ -1,15 +1,19 @@
 import { ChartConfig } from "@/components/ui/chart";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 
 export function useCustomPieChartDataHook(): {
   data: any;
   config: any;
   isLoading: boolean;
+  setTarget: (value: string) => void;
 } {
+  const [target, setTarget] = useState("characters");
+
   const { data, isLoading } = useQuery({
     queryKey: ["count"],
     queryFn: () =>
-      fetch("http://localhost:8111/api/count/films/characters").then((res) =>
+      fetch(`http://localhost:8111/api/count/films/${target}`).then((res) =>
         res.json()
       ),
   });
@@ -36,5 +40,5 @@ export function useCustomPieChartDataHook(): {
     {} as ChartConfig
   );
 
-  return { data: filledData, config: chartConfig, isLoading };
+  return { data: filledData, config: chartConfig, isLoading, setTarget };
 }

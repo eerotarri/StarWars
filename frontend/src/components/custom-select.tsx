@@ -5,10 +5,22 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useQueryClient } from "@tanstack/react-query";
 
-function CustomSelect({ ...props }: any) {
+function CustomSelect({
+  setTarget,
+  ...props
+}: {
+  setTarget: (value: string) => void;
+}) {
+  const queryClient = useQueryClient();
   return (
-    <Select onValueChange={(value) => console.log(value)}>
+    <Select
+      onValueChange={(value) => {
+        setTarget(value);
+        queryClient.invalidateQueries({ queryKey: ["count"] });
+      }}
+    >
       <SelectTrigger {...props}>
         <SelectValue placeholder="characters" defaultValue="characters" />
       </SelectTrigger>

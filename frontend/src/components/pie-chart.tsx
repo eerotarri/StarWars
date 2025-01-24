@@ -11,7 +11,7 @@ import { useCustomPieChartDataHook } from "@/lib/hooks/use-custom-pie-chart-data
 import CustomSelect from "./custom-select";
 
 export function CustomPieChart() {
-  const { data, config, isLoading } = useCustomPieChartDataHook();
+  const { data, config, isLoading, setTarget } = useCustomPieChartDataHook();
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -21,7 +21,7 @@ export function CustomPieChart() {
     <Card className="flex flex-col bg-secondary rounded-xl shadow-lg">
       <CardHeader className="items-center pb-0 text-secondary-foreground">
         <CardTitle className="mb-4">
-          <CustomSelect className="mb-2" />
+          <CustomSelect setTarget={setTarget} className="mb-2" />
           per film
         </CardTitle>
       </CardHeader>
