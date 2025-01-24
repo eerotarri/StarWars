@@ -33,6 +33,6 @@ export async function getFilms() {
   return fetchData("films/");
 }
 
-export async function getById(item: String, id: String) {
-  return fetchData(`${item}/${id}`);
+export async function getByType(type: String) {
+  return fetchData(`${type}/`);
 }
