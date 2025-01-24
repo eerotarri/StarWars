@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import List
 
-class People(BaseModel):
+class Planet(BaseModel):
     name: str
     diameter: str
     rotation_period: str

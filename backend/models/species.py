@@ -1,7 +1,7 @@
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 
-class People(BaseModel):
+class Species(BaseModel):
     name: str
     classification: str
     designation: str
@@ -11,8 +11,8 @@ class People(BaseModel):
     hair_colors: str
     skin_colors: str
     language: str
-    homeworld: str
-    people: List[str]   
+    homeworld: Optional[str]
+    people: List[str]
     films: List[str]
     url: str
     created: str

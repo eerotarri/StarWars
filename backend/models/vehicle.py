@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import List
 
-class People(BaseModel):
+class Vehicle(BaseModel):
     name: str
     model: str
     vehicle_class: str
