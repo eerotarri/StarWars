@@ -8,6 +8,7 @@ import NestedItem from "./nested-item";
 import { capitalize } from "@/lib/utils";
 import { ChevronDownIcon } from "lucide-react";
 import { useNestedListData } from "@/lib/hooks/use-nested-list-data-hook";
+import { Spinner } from "./ui/spinner";
 
 interface NestedListProps {
   name: string;
@@ -25,12 +26,12 @@ function NestedList({ name, type, urls, open }: NestedListProps): JSX.Element {
   const { data, isLoading } = useNestedListData(type, urls);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Spinner />;
   }
 
   return (
     <Accordion
-      className="w-full max-w-7xl self-center text-foreground mb-1"
+      className="w-full self-center text-foreground mb-1"
       type="single"
       collapsible
     >

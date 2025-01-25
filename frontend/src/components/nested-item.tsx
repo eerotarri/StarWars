@@ -17,7 +17,7 @@ function NestedItem({ data }: { data: any }): JSX.Element {
   return (
     <AccordionItem key={data.url} value={`item-data-${data.url}`}>
       <AccordionTrigger className="w-full bg-secondary rounded-xl mt-1 AccordionTrigger">
-        {data?.name || data?.title || "Loading..."}
+        {data?.name || data?.title || "Else"}
         <ChevronDownIcon
           className="AccordionChevron float-right"
           aria-hidden
