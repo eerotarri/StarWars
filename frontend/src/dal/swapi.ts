@@ -1,5 +1,5 @@
 const BASE_URL = "http://localhost:8111/api/";
-const TIMEOUT = 15 * 1000; // 15 seconds
+const TIMEOUT = 60 * 1000; // 15 seconds
 
 async function fetchData(endpoint: string) {
   const url = BASE_URL + endpoint;
