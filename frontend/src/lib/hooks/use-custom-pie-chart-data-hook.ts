@@ -1,6 +1,6 @@
 import { ChartConfig } from "@/components/ui/chart";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export function useCustomPieChartDataHook(): {
   data: any;

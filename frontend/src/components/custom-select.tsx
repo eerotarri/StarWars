@@ -7,11 +7,25 @@ import {
 } from "@/components/ui/select";
 import { useQueryClient } from "@tanstack/react-query";
 
+/**
+ * CustomSelect component renders a dropdown select menu with various options.
+ * It uses the `Select` component from the UI library and integrates with React Query.
+ *
+ * @param {Object} props - The props object.
+ * @param {Function} props.setTarget - A function to set the selected target value.
+ * @param {Object} [props.x] - Additional props to be passed to the SelectTrigger component.
+ *
+ * @returns {JSX.Element} The rendered CustomSelect component.
+ *
+ * @example
+ * <CustomSelect setTarget={(value) => console.log(value)} />
+ */
 function CustomSelect({
   setTarget,
   ...props
 }: {
   setTarget: (value: string) => void;
+  [x: string]: any;
 }) {
   const queryClient = useQueryClient();
   return (
@@ -22,7 +36,7 @@ function CustomSelect({
       }}
     >
       <SelectTrigger {...props}>
-        <SelectValue placeholder="characters" defaultValue="characters" />
+        <SelectValue placeholder="Characters" defaultValue="characters" />
       </SelectTrigger>
       <SelectContent>
         <SelectItem value="characters">Characters</SelectItem>
