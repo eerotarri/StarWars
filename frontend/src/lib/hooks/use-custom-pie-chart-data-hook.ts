@@ -1,6 +1,6 @@
 import { ChartConfig } from "@/components/ui/chart";
-import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 
 export function useCustomPieChartDataHook(): {
   data: any;
@@ -8,6 +8,7 @@ export function useCustomPieChartDataHook(): {
   isLoading: boolean;
   setTarget: (value: string) => void;
 } {
+  const queryClient = useQueryClient();
   const [target, setTarget] = useState("characters");
 
   const { data, isLoading } = useQuery({
@@ -17,6 +18,11 @@ export function useCustomPieChartDataHook(): {
         res.json()
       ),
   });
+
+  // Invalidate the query when the target changes to trigger rerender at the right time
+  useEffect(() => {
+    queryClient.invalidateQueries({ queryKey: ["count"] });
+  }, [target]);
 
   const filledData =
     data?.map((item: { name: string; count: number }, index: number) => ({
