@@ -50,5 +50,5 @@ export async function getByType(type: String) {
 }
 
 export async function getCount(type: String, target: String) {
-  return fetchData(`count/${type}/${target}`);
+  return fetchData(`count/${type}/${target}/`);
 }

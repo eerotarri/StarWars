@@ -14,7 +14,7 @@ export function useCustomPieChartDataHook(): {
   const { data, isLoading } = useQuery({
     queryKey: ["count"],
     queryFn: () =>
-      fetch(`http://localhost:8111/api/count/films/${target}`).then((res) =>
+      fetch(`http://localhost:8111/api/count/films/${target}/`).then((res) =>
         res.json()
       ),
   });
