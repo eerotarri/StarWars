@@ -37,7 +37,19 @@ You can change the port by setting the `PORT` constant variable in `main.py`.
 
 ## API Endpoints
 
-- `GET /api/films` - Retrieve a list of films
+- `GET /api/films/` - Retrieve a list of films
+- `GET /api/films/{film_id}/` - Retrieve a single film by ID
+- `GET /api/people/` - Retrieve a list of people (characters)
+- `GET /api/people/{person_id}/` - Retrieve a single person by ID
+- `GET /api/planets/` - Retrieve a list of planets
+- `GET /api/planets/{planet_id}/` - Retrieve a single planet by ID
+- `GET /api/species/` - Retrieve a list of species
+- `GET /api/species/{species_id}/` - Retrieve a single species by ID
+- `GET /api/starships/` - Retrieve a list of starships
+- `GET /api/starships/{starship_id/}` - Retrieve a single starship by ID
+- `GET /api/vehicles/` - Retrieve a list of vehicles
+- `GET /api/vehicles/{vehicle_id}/` - Retrieve a single vehicle by ID
+- `GET /api/count/{resource_type}/{target_type}/` - Retrieve the number of resources of a specific type that are related to a target resource type
 
 ## Design Choices
 
